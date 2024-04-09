@@ -34,7 +34,7 @@ The "Crafting and Hosting Portfolio Website with GitLab CI/CD" project serves as
    - Conduct local testing to validate the Dockerized application's functionality and compatibility.
 
 4. **CI/CD Setup with GitLab:**
-   - Configure a comprehensive CI/CD pipeline (`.gitlab-ci.yml`) on GitLab to automate build and deployment processes.
+   - Configure a comprehensive CI/CD pipeline on GitLab [`.gitlab-ci.yml`](https://github.com/DimitryZH/portfolio-website-GitLab-CICD/blob/main/.gitlab-ci.yml)  to automate build and deployment processes.
    - Specify distinct stages for building and pushing Docker images, as well as deploying to AWS EC2.
 
 5. **AWS EC2 Setup:**
