@@ -1,0 +1,68 @@
+# Use the Docker executor with Docker version 19.03.12
+image: docker:19.03.12
+
+# Define services to be used in the CI/CD pipeline
+services:
+  - docker:19.03.12-dind
+
+# Define stages for the pipeline
+stages:
+  - build_and_push
+  - deploy
+
+# Build and push Docker image stage
+build_and_push_docker_image:
+ 
+  stage: build_and_push
+ 
+  script:
+    # Display a message indicating that the Docker image is being built
+    - echo "Building Docker image"
+   
+    # Build the Docker image with a tag based on the commit reference name
+    - docker build -t registry.gitlab.com/dmitry1094608/dmitryportfolio/portfolioimage:$CI_COMMIT_REF_NAME .
+   
+    # Display a message indicating that the Docker image is being pushed to the registry
+    - echo "Pushing Docker image to GitLab Container Registry"
+   
+    # Log in to the GitLab Container Registry
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+   
+    # Push the Docker image to the GitLab Container Registry
+    - docker push registry.gitlab.com/dmitry1094608/dmitryportfolio/portfolioimage:$CI_COMMIT_REF_NAME
+ 
+  only:
+    - main
+# Deploy to EC2 stage
+deploy_to_EC2:
+ 
+  stage: deploy
+  image: ubuntu:latest
+ 
+  # Commands to run before executing the script
+    before_script:
+   
+    # Install SSH client if not already available
+    - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )"
+   
+    # Start SSH agent
+    - eval $(ssh-agent -s)
+   
+    # Create SSH directory
+    - mkdir -p ~/.ssh
+   
+    # Write SSH private key to a file and set appropriate permissions
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/test.pem
+    - chmod 400 ~/.ssh/test.pem
+
+  script:
+    # Log in to EC2 instance and perform Docker-related tasks
+    - ssh -T -o StrictHostKeyChecking=no -i ~/.ssh/test.pem ec2-user@ec2-54-208-55-108.compute-1.amazonaws.com "sudo docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY""
+    - ssh -T -o StrictHostKeyChecking=no -i ~/.ssh/test.pem ec2-user@ec2-54-208-55-108.compute-1.amazonaws.com "sudo docker pull registry.gitlab.com/dmitry1094608/dmitryportfolio/portfolioimage:$CI_COMMIT_REF_NAME"
+    - ssh -T -o StrictHostKeyChecking=no -i ~/.ssh/test.pem ec2-user@ec2-54-208-55-108.compute-1.amazonaws.com "sudo docker run -itd -p 80:80 -p 443:443 registry.gitlab.com/dmitry1094608/dmitryportfolio/portfolioimage:$CI_COMMIT_REF_NAME"
+
+   dependencies:
+    - build_and_push_docker_image
+  
+  only:
+    - main
