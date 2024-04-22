@@ -6,6 +6,8 @@ The "Crafting and Hosting Portfolio Website with GitLab CI/CD" project serves as
 - To explore the deployed portfolio website, visit this link: [https://projects.dmitry-web.com](https://projects.dmitry-web.com)
 
 ## Technologies:
+
+  [![Terraform Badge](https://img.shields.io/badge/Terraform-623CE4?style=for-the-badge&logo=terraform&logoColor=white)](#)
   [![GitLab Badge](https://img.shields.io/badge/GitLab-FCA121?style=for-the-badge&logo=gitlab&logoColor=white)](#)
   [![Git Badge](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)](#)
   [![Docker Badge](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](#)
@@ -22,24 +24,26 @@ The "Crafting and Hosting Portfolio Website with GitLab CI/CD" project serves as
 
 ### Implementation: 
 
-1. **Project Setup on GitHub:**
-   - Establish a GitHub repository to house project files and related resources.
+1. **Project Setup on GitLab:**
+   - Establish a GitLab repository to house project files and related resources.
    - Integrate the repository with Visual Studio Code for efficient development workflows.
 
 2. **Local Development:**
    - Construct the portfolio website locally using HTML, CSS, and JavaScript, incorporating links, diagrams, and project overviews.
 
 3. **Dockerization:**
-   - Define a Dockerfile to encapsulate the portfolio website within a Docker image, leveraging the Nginx base image for optimal serving capabilities.
+   - Define a Dockerfile to encapsulate the portfolio website within a Docker image, leveraging the Nginx base image for optimal serving capabilities. Check out the  [`Dockerfile`](link) here. 
    - Conduct local testing to validate the Dockerized application's functionality and compatibility.
 
 4. **CI/CD Setup with GitLab:**
    - Configure a comprehensive CI/CD pipeline on GitLab [`.gitlab-ci.yml`](https://github.com/DimitryZH/portfolio-website-GitLab-CICD/blob/main/.gitlab-ci.yml)  to automate build and deployment processes.
    - Specify distinct stages for building and pushing Docker images, as well as deploying to AWS EC2.
 
-5. **AWS EC2 Setup:**
-   - Deploy an EC2 instance on AWS to function as the production server for hosting the Dockerized portfolio website.
-   - Install Docker on the EC2 instance to facilitate the execution of containerized applications.
+5. **AWS EC2 and Docker Setup with Terraform:**
+    - Create AWS resources and install Docker on an EC2 instance using Terraform to serve as the production server for hosting the Dockerized portfolio website.
+   - Utilize Terraform to automate the deployment process, ensuring consistency and repeatability.
+   - Check out the Terraform configuration file [`ec2_docker_nginx.tf`](link) for detailed implementation.
+
 
 6. **CI/CD Workflow:**
    - Triggered by commits to the main branch on GitLab, GitLab CI/CD orchestrates the pipeline's execution.
