@@ -20,7 +20,7 @@ The "Crafting and Hosting Portfolio Website with GitLab CI/CD" project serves as
   [![VSCode Badge](https://img.shields.io/badge/VSCode-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white)](#)
 
 ## Project Diagram:
-![crafting-portfolio-website](https://github.com/DimitryZH/Portfolio-website-/assets/146372946/32e5873e-04c6-4eb3-8bd9-b8bc02306b18)
+![crafting-portfolio-website](https://github.com/DimitryZH/portfolio-website-GitLab-CICD/assets/146372946/f3ce4ae4-e731-4050-8bec-4183bcecf17a)
 
 ### Implementation: 
 
@@ -32,7 +32,7 @@ The "Crafting and Hosting Portfolio Website with GitLab CI/CD" project serves as
    - Construct the portfolio website locally using HTML, CSS, and JavaScript, incorporating links, diagrams, and project overviews.
 
 3. **Dockerization:**
-   - Define a Dockerfile to encapsulate the portfolio website within a Docker image, leveraging the Nginx base image for optimal serving capabilities. Check out the  [`Dockerfile`](link) here. 
+   - Define a Dockerfile to encapsulate the portfolio website within a Docker image, leveraging the Nginx base image for optimal serving capabilities. Check out the  [`Dockerfile`](https://github.com/DimitryZH/portfolio-website-GitLab-CICD/blob/main/Dockerfile) here. 
    - Conduct local testing to validate the Dockerized application's functionality and compatibility.
 
 4. **CI/CD Setup with GitLab:**
@@ -42,7 +42,7 @@ The "Crafting and Hosting Portfolio Website with GitLab CI/CD" project serves as
 5. **AWS EC2 and Docker Setup with Terraform:**
     - Create AWS resources and install Docker on an EC2 instance using Terraform to serve as the production server for hosting the Dockerized portfolio website.
    - Utilize Terraform to automate the deployment process, ensuring consistency and repeatability.
-   - Check out the Terraform configuration file [`ec2_docker_nginx.tf`](link) for detailed implementation.
+   - Check out the Terraform configuration file [`ec2_docker_nginx.tf`](https://github.com/DimitryZH/portfolio-website-GitLab-CICD/blob/main/ec2_docker_nginx.tf) for detailed implementation.
 
 
 6. **CI/CD Workflow:**
